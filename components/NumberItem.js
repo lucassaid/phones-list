@@ -30,14 +30,10 @@ export default function NumberItem({
     <div className="my-1">
       <div className="flex items-center">
         <div
-          className="flex items-center flex-1 text-lg py-2"
+          className="flex items-center flex-1 text-xl py-2"
           onClick={onToggleCalled}
         >
-          <input
-            checked={called}
-            type="checkbox"
-          />
-          <div className={`ml-2 ${called ? 'opacity-50' : ''}`}>
+          <div className={`ml-2 ${called ? 'opacity-40 line-through' : ''}`}>
             {number}
           </div>
         </div>
@@ -47,6 +43,7 @@ export default function NumberItem({
         <textarea
           onChange={onNotesChanged}
           value={notes}
+          rows={6}
           placeholder="Ingrese sus notas aquí"
           className="w-full border-2 mb-3 p-2 rounded-md"
         />
