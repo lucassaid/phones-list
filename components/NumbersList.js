@@ -27,7 +27,7 @@ export default function NumbersList({numbers}) {
   }
 
   return (
-    <div>
+    <div className="mb-14">
       {numbers.map(number => (
         <NumberItem
           key={number.id}

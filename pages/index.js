@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import NumbersList from '../components/NumbersList'
 import SetNumbersRange from '../components/SetNumbersRange'
-
 import numbersState, { numbersSelector } from '../atoms/numbers'
 
 export default function Home() {

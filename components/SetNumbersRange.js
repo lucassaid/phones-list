@@ -29,6 +29,7 @@ export default function setNumbersRange({onAddNumbers}) {
       </h3>
       {Object.keys(range).map(prop => (
         <input
+          key={prop}
           className="border-2 p-2 rounded-md mb-3"
           onChange={e => {
             setRange({...range, [prop]: Number(e.target.value)})
@@ -38,12 +39,14 @@ export default function setNumbersRange({onAddNumbers}) {
           type="number"
         />
       ))}
-      <button
-        className="bg-blue-400 mt-3 rounded-md text-white px-4 py-2"
-        onClick={calculateNumbers}
-      >
-        Agregar numeros
-      </button>
+      <div>
+        <button
+          className="bg-blue-400 mt-3 rounded-md text-white px-4 py-2"
+          onClick={calculateNumbers}
+        >
+          Agregar numeros
+        </button>
+      </div>
     </div>
   )
 }
