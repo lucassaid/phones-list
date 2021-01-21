@@ -17,7 +17,7 @@ export default function NumberItem({
   const notesButton = (
     <div
       onClick={notesClicked}
-      className={`flex-0 w-9 h-9 rounded-full p-2 opacity-80 ${notes ? 'bg-blue-500' : ''}`}
+      className={`flex-0 w-9 h-9 rounded-full p-2 opacity-80 cursor-pointer ${notes ? 'bg-blue-500' : ''}`}
     >
       <img
         src="/icons/edit.svg"
@@ -27,10 +27,10 @@ export default function NumberItem({
   )
 
   return (
-    <div className="my-1">
+    <div className="hover:bg-gray-100">
       <div className="flex items-center">
         <div
-          className="flex items-center flex-1 text-xl py-2"
+          className="flex items-center py-3  flex-1 text-xl cursor-pointer "
           onClick={onToggleCalled}
         >
           <div className={`ml-2 ${called ? 'opacity-40 line-through' : ''}`}>

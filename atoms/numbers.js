@@ -6,10 +6,13 @@ import {
 const numbersState = atom({
   key: 'numbersState',
   default: {},
+  persistence_UNSTABLE: {
+    type: 'numbersState'
+  },
 });
 
 export const numbersSelector = selector({
-  key: 'getNumbersState', // unique ID (with respect to other atoms/selectors)
+  key: 'getNumbersState',
   get: ({get}) => {
     const numbers = get(numbersState);
 
