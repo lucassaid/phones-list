@@ -1,15 +1,18 @@
 import exportFromJSON from 'export-from-json'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import useSWR from 'swr'
 import { fetchSequence } from '../firebase/functions'
 import useTimestamp from '../lib/useTimestamp'
- 
+
+const fileName = 'download'
+const exportType = 'csv'
+const savedFileString = 'Archivo descargado!'
+
 export default function ExportNumbers() {
 
   const { getDate } = useTimestamp()
   const { data: numbers } = useSWR('sequence', fetchSequence)
-  const fileName = 'download'
-  const exportType = 'csv'
+  const [ exportLabel, setExportLabel ] = useState('Exportar números')
 
   const getNumbersArr = useCallback(() => {
     return Object.keys(numbers)
@@ -25,17 +28,23 @@ export default function ExportNumbers() {
   }, [numbers])
   
   const initExportFromJSON = () => {
+    setExportLabel('Generando archivo...')
     const data = getNumbersArr()
     exportFromJSON({ data, fileName, exportType })
+    setExportLabel(savedFileString)
   }
+
+  const disabled = !numbers 
+    || !Object.keys(numbers).length
+    || exportLabel == savedFileString
 
   return (
     <button
-      disabled={!numbers || !Object.keys(numbers).length}
+      disabled={disabled}
       className="btn border"
       onClick={initExportFromJSON}
     >
-      Exportar números
+      {exportLabel}
     </button>
   )
 }
