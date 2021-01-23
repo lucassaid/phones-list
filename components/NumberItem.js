@@ -16,6 +16,15 @@ export default function NumberItem({
     onSaveNotes(notesState)
   }
 
+  const callButton = (
+    <a
+      className="flex-0 btn border border-gray-300 opacity-80 cursor-pointer mr-3"
+      href={`tel:${number}`}
+    >
+      Llamar
+    </a>
+  )
+
   const notesButton = (
     <div
       onClick={() => setExpanded(!expanded)}
@@ -59,6 +68,7 @@ export default function NumberItem({
             {number}
           </div>
         </div>
+        {callButton}
         {notesButton}
       </div>
       {expanded && expandedArea}
