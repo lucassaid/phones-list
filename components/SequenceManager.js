@@ -16,8 +16,8 @@ export default function SequenceManager() {
   }
 
   const save = () => {
-    localStorage.setItem('sequence-id', newSeqId)
-    mutate('sequence')
+    const trimmedId = newSeqId.trim().trimStart()
+    localStorage.setItem('sequence-id', trimmedId)
     setSaveText('Guardado!')
     setSaveDisabled(true)
   }

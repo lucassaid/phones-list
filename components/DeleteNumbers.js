@@ -18,6 +18,7 @@ export default function DeleteNumbers() {
       <button
         onClick={() => {
           localStorage.removeItem('sequence-id')
+          mutate('sequence-id')
           mutate('sequence')
           closeAlert()
         }}

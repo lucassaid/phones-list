@@ -1,4 +1,4 @@
-import { db } from './index'
+import firebase, { db } from './index'
 
 export const fetchSequence = async () => {
   const sequenceId = localStorage.getItem('sequence-id')
@@ -14,6 +14,7 @@ export const fetchSequence = async () => {
 
 export const addSequence = async (sequence) => {
   const sequenceRef = db.collection('sequences').doc()
+  await sequenceRef.set({ createdAt: firebase.firestore.Timestamp.now() })
   
   const batch = db.batch()
 

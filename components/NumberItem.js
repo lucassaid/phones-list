@@ -54,7 +54,7 @@ export default function NumberItem({
       />
       <div className="text-right mt-2 pb-4">
         <button
-          className="btn btn-primary"
+          className="btn-small btn-primary"
           onClick={saveNotes}
         >
           Guardar

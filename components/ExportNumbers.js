@@ -31,7 +31,7 @@ export default function ExportNumbers() {
 
   return (
     <button
-      disabled={!numbers}
+      disabled={!numbers || !Object.keys(numbers).length}
       className="btn border"
       onClick={initExportFromJSON}
     >
