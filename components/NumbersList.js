@@ -1,9 +1,13 @@
 import NumberItem from './NumberItem'
 import { useMemo } from 'react'
+import firebase from '../firebase'
 import { updatePhone } from '../firebase/functions'
-import { mutate } from 'swr'
+import useSWR, { mutate } from 'swr'
+import fetchStorage from '../lib/fetchStorage'
 
 export default function NumbersList({ numbers }) {
+
+  const { data: showDates } = useSWR('show-dates', fetchStorage)
 
   const numbersArr = useMemo(() => {
     return Object.keys(numbers)
@@ -17,13 +21,22 @@ export default function NumbersList({ numbers }) {
     mutate('sequence', {...numbers, [id]: newNumber}, false)
   }
 
+  const updateCalled = (id, called) => {
+    let updateObj = { called }
+    if(called) {
+      updateObj.calledAt = firebase.firestore.Timestamp.now()
+    }
+    updatePhoneAndMutate(id, updateObj)
+  }
+
   return (
     <div className="mb-14">
       {numbersArr.map(({ id, ...number}) => (
         <NumberItem
           key={id}
-          onToggleCalled={() => updatePhoneAndMutate(id, { called: !number.called})}
+          onToggleCalled={() => updateCalled(id, !number.called)}
           onSaveNotes={notes => updatePhoneAndMutate(id, { notes })}
+          showDate={showDates == 'true'}
           {...number}
         />
       ))}

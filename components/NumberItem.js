@@ -1,15 +1,21 @@
 import { useState } from 'react'
+import useTimestamp from '../lib/useTimestamp'
 
 export default function NumberItem({
   number,
   called,
   notes = '',
   onToggleCalled,
-  onSaveNotes
+  onSaveNotes,
+  calledAt,
+  showDate
 }) {
 
   const [expanded, setExpanded] = useState(false)
   const [notesState, setNotesState] = useState(notes)
+  const { getDate } = useTimestamp()
+
+  const calledDate = showDate && calledAt && getDate(calledAt)
 
   const saveNotes = () => {
     setExpanded(false)
@@ -18,7 +24,7 @@ export default function NumberItem({
 
   const callButton = (
     <a
-      className="flex-0 px-3 py-1 rounded-md inline-block border border-gray-300 opacity-80 cursor-pointer mr-3"
+      className="flex-0 btn-small border border-gray-300 opacity-80 mr-2 md:mr-3"
       href={`tel:${number}`}
     >
       Llamar
@@ -57,16 +63,23 @@ export default function NumberItem({
     </div>
   )
 
+  const date = calledDate ? (
+    <div className="opacity-50 text-sm mt-1">
+      {calledDate}
+    </div>
+  ) : null
+
   return (
     <div className="hover:bg-gray-100 px-2 rounded-md">
       <div className="flex items-center">
         <div
-          className="flex items-center py-3 flex-1 text-xl cursor-pointer "
+          className="py-3 pl-2 flex-1 text-xl cursor-pointer "
           onClick={onToggleCalled}
         >
-          <div className={`ml-2 ${called ? 'opacity-40 line-through' : ''}`}>
+          <div className={called ? 'opacity-40 line-through' : ''}>
             {number}
           </div>
+          {date}
         </div>
         {callButton}
         {notesButton}

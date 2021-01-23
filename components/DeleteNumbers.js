@@ -37,7 +37,7 @@ export default function DeleteNumbers() {
 
   return (
     <button
-      className="btn border hover:border-gray-300"
+      className="btn-small border hover:border-gray-300"
       onClick={deleteNumbers}
     >
       Borrar todos los números

@@ -33,7 +33,7 @@ export default function setNumbersRange({onNewSequence}) {
         {Object.keys(range).map(prop => (
           <input
             key={prop}
-            className="border-2 p-2 rounded-md mb-3 max-w-full"
+            className="form-control"
             onChange={e => {
               setRange({
                 ...range,
@@ -49,7 +49,7 @@ export default function setNumbersRange({onNewSequence}) {
           <button
             disabled={generating}
             type="submit"
-            className={`btn btn-primary mt-3 ${generating ? 'opacity-70 cursor-auto' : ''}`}
+            className="btn btn-primary mt-3"
             onClick={generateAndAddSequence}
           >
             {generating ? 'Generando números...' : 'Generar números'}
