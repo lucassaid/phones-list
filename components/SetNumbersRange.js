@@ -25,8 +25,8 @@ export default function setNumbersRange({onNewSequence}) {
   const handleSubmit = e => e.preventDefault()
 
   return (
-    <div>
-      <h3 className="mt-10 mb-6 text-2xl">
+    <div className="lg:pt-20">
+      <h3 className="mb-6 text-2xl">
         Ingrese el rango de números
       </h3>
       <form onSubmit={handleSubmit}>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 export default function NumberItem({
   number,
   called,
-  notes,
+  notes = '',
   onToggleCalled,
   onSaveNotes
 }) {

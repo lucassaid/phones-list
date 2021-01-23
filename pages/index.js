@@ -33,15 +33,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="w-11/12 max-w-lg mx-auto">
+      <main className="w-11/12 max-w-lg mx-auto pt-10">
         {!numbersLength ? (
           <SetNumbersRange onNewSequence={handleNewSequence} />
         ) : (
           <>
-            <div className="text-right pt-10 mb-7">
+            <div className="text-right mb-7">
               <DeleteNumbers/>
             </div>
-            <h3 className="text-3xl mb-8">Teléfonos</h3>
+            <h3 className="text-3xl mb-2">Teléfonos</h3>
+            <div className="opacity-70 text-md mb-8">Toque un número para tacharlo</div>
             <NumbersList numbers={numbers}/>
           </>
         )}
