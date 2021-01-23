@@ -18,7 +18,7 @@ export default function NumberItem({
 
   const callButton = (
     <a
-      className="flex-0 btn border border-gray-300 opacity-80 cursor-pointer mr-3"
+      className="flex-0 px-3 py-1 rounded-md inline-block border border-gray-300 opacity-80 cursor-pointer mr-3"
       href={`tel:${number}`}
     >
       Llamar
