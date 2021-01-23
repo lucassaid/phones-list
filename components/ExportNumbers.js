@@ -18,7 +18,7 @@ export default function ExportNumbers() {
         return {
           numero: number,
           llamado: called ? 'SI' : 'NO',
-          fecha: getDate(calledAt)
+          fecha: calledAt ? getDate(calledAt) : '-'
         }
       })
       .sort((a, b) => a.index > b.index ? 1 : -1)
