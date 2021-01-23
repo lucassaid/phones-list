@@ -20,6 +20,8 @@ export default function SequenceManager() {
     localStorage.setItem('sequence-id', trimmedId)
     setSaveText('Guardado!')
     setSaveDisabled(true)
+    mutate('sequence')
+    mutate('sequence-id')
   }
 
   return (

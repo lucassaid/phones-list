@@ -1,9 +1,17 @@
 import firebase, { db } from './index'
 
+export const fetchSequenceInfo = async () => {
+  const sequenceId = localStorage.getItem('sequence-id')
+  if(!sequenceId) return null
+  const ref = db.collection('sequences').doc(sequenceId)
+  const doc = await ref.get()
+  if(!doc.exists) return null
+  return doc.data()
+}
+
 export const fetchSequence = async () => {
   const sequenceId = localStorage.getItem('sequence-id')
   if(!sequenceId) return []
-
   const ref = db.collection('sequences').doc(sequenceId).collection('phones')
   const docs = await ref.get()
   if(docs.empty) return {}
@@ -12,19 +20,18 @@ export const fetchSequence = async () => {
   return result
 }
 
-export const addSequence = async (sequence) => {
+export const addSequence = async (sequence, range) => {
   const sequenceRef = db.collection('sequences').doc()
-  await sequenceRef.set({ createdAt: firebase.firestore.Timestamp.now() })
-  
+  await sequenceRef.set({ 
+    createdAt: firebase.firestore.Timestamp.now(),
+    range 
+  })
   const batch = db.batch()
-
   sequence.forEach((number, index) => {
     const docRef = db.collection('sequences').doc(sequenceRef.id).collection('phones').doc()
     batch.set(docRef, { number, index })
   })
-
   await batch.commit()
-
   return sequenceRef.id
 }
 

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import NumbersList from '../components/NumbersList'
 import SetNumbersRange from '../components/SetNumbersRange'
 import { 
+  fetchSequenceInfo,
   fetchSequence,
   addSequence
 } from '../firebase/functions'
@@ -13,10 +14,13 @@ import Link from 'next/link'
 export default function Home() {
 
   const { data: numbers } = useSWR('sequence', fetchSequence)
+  const { data: info } = useSWR('sequenceInfo', fetchSequenceInfo)
   const numbersLength = useMemo(() => Object.keys(numbers || {}).length, [numbers])
 
-  const handleNewSequence = async sequence => {
-    const sequenceId = await addSequence(sequence)
+  const legibleRange = info ? `${info.range.from} - ${info.range.to}` : ''
+
+  const handleNewSequence = async (sequence, range) => {
+    const sequenceId = await addSequence(sequence, range)
     localStorage.setItem('sequence-id', sequenceId)
     mutate('sequence')
   }
@@ -59,7 +63,9 @@ export default function Home() {
         ) : (
           <>
             <h3 className="text-3xl mb-2">Teléfonos</h3>
-            <div className="opacity-70 text-md mb-8">Toque un número para tacharlo</div>
+            <div className="opacity-70 text-lg mb-8">
+              {legibleRange}
+            </div>
             <NumbersList numbers={numbers}/>
           </>
         )}

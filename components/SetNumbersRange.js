@@ -19,7 +19,7 @@ export default function setNumbersRange({onNewSequence}) {
     const { from, to } = range
     const mapArr = (o, n) => from + n
     const numbersArr = Array.from(new Array(to - from + 1), mapArr)
-    onNewSequence(shuffle(numbersArr))
+    onNewSequence(shuffle(numbersArr), range)
   }
 
   const handleSubmit = e => e.preventDefault()
