@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .btn {
+    @apply px-3 py-2 rounded-md inline-block;
+  }
+
+  .btn-primary {
+    @apply bg-blue-400 text-white;
+  }
+}

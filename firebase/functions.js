@@ -8,10 +8,7 @@ export const fetchSequence = async () => {
   const docs = await ref.get()
   if(docs.empty) return {}
   let result = {}
-  docs.forEach(doc => {
-    result[doc.id] = doc.data()
-    // result.push({id: doc.id, ...doc.data()})
-  })
+  docs.forEach(doc => result[doc.id] = doc.data())
   return result
 }
 
