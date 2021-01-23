@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import NumbersList from '../components/NumbersList'
 import SetNumbersRange from '../components/SetNumbersRange'
 import { 
@@ -46,10 +45,6 @@ export default function Home() {
 
   return (
     <div>
-      <Head>
-        <title>Lista de números</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
       <main className="w-11/12 max-w-lg mx-auto pt-10">
 
