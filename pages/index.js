@@ -46,9 +46,7 @@ export default function Home() {
 
   return (
     <div>
-
       <main className="pt-10">
-
         <div className="container mb-7 flex space-x-5 items-center justify-end">
           {numbersLength ? <DeleteNumbers/> : null}
           {wheelIcon}
