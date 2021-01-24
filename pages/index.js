@@ -16,12 +16,13 @@ export default function Home() {
   const { data: info } = useSWR('sequenceInfo', fetchSequenceInfo)
   const numbersLength = useMemo(() => Object.keys(numbers || {}).length, [numbers])
 
-  const legibleRange = info ? `${info.range.from} - ${info.range.to}` : ''
+  const legibleRange = info ? `${info.range.from} - ${info.range.to}` : ' '
 
   const handleNewSequence = async (sequence, range) => {
     const sequenceId = await addSequence(sequence, range)
     localStorage.setItem('sequence-id', sequenceId)
     mutate('sequence')
+    mutate('sequenceInfo')
   }
 
   if(!numbers) return (
