@@ -26,21 +26,13 @@ export default function Advanced() {
   )
 
   return (
-    <div className="w-11/12 max-w-lg mx-auto">
-      
+    <div className="container">
       {topBar}
-
-      <div>
-        <SequenceManager/>
-      </div>
+      <SequenceManager/>
       <hr className="my-10"/>
-      <div>
-        <ShowDates/>
-      </div>
+      <ShowDates/>
       <hr className="my-10"/>
-      <div>
-        <ExportNumbers/>
-      </div>
+      <ExportNumbers/>
     </div>
   )
 }

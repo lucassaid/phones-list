@@ -2,27 +2,64 @@ import { useState } from 'react'
 import { validateRange, shuffle } from '../lib/utils'
 import { useAlert } from './Alert'
 
-const placeholders = {
-  from: 'Número inicial',
-  to: 'Número final'
-}
-
 export default function setNumbersRange({onNewSequence}) {
 
-  const [range, setRange] = useState({from: undefined, to: undefined})
+  const [from, setFrom] = useState()
+  const [to, setTo] = useState()
   const [generating, setGenerating] = useState(false)
   const alert = useAlert()
 
   const generateAndAddSequence = () => {
-    if(!validateRange(range, alert)) return
+    if(!validateRange({from, to}, alert)) return
     setGenerating(true)
-    const { from, to } = range
     const mapArr = (o, n) => from + n
     const numbersArr = Array.from(new Array(to - from + 1), mapArr)
-    onNewSequence(shuffle(numbersArr), range)
+    onNewSequence(shuffle(numbersArr), {from, to})
   }
 
   const handleSubmit = e => e.preventDefault()
+
+  const range = {
+    from: {
+      setter: setFrom,
+      placeholder: 'Número inicial',
+      value: from,
+    },
+    to: {
+      setter: setTo,
+      placeholder: 'Número final',
+      value: to,
+    }
+  }
+
+  const mapInputs = prop => {
+    const { setter, placeholder, value } = range[prop]
+    return (
+      <div key={prop}>
+        <input
+          className="form-control mb-3"
+          onChange={e => setter(Number(e.target.value))}
+          placeholder={placeholder}
+          defaultValue={value}
+          type="number"
+          min="0"
+          inputMode="numeric"
+          pattern="[0-9]*"
+        />
+      </div> 
+    )
+  }
+
+  const saveButton = (
+    <button
+      disabled={generating}
+      type="submit"
+      className="btn btn-primary"
+      onClick={generateAndAddSequence}
+    >
+      {generating ? 'Generando números...' : 'Generar números'}
+    </button>
+  )
 
   return (
     <div className="lg:pt-20">
@@ -30,32 +67,9 @@ export default function setNumbersRange({onNewSequence}) {
         Ingrese el rango de números
       </h3>
       <form onSubmit={handleSubmit}>
-        {Object.keys(range).map(prop => (
-          <div>
-            <input
-              key={prop}
-              className="form-control"
-              onChange={e => {
-                setRange({
-                  ...range,
-                  [prop]: Number(e.target.value)
-                })
-              }}
-              placeholder={placeholders[prop]}
-              defaultValue={range[prop]}
-              type="number"
-            />
-          </div> 
-        ))}
-        <div>
-          <button
-            disabled={generating}
-            type="submit"
-            className="btn btn-primary mt-3"
-            onClick={generateAndAddSequence}
-          >
-            {generating ? 'Generando números...' : 'Generar números'}
-          </button>
+        {Object.keys(range).map(mapInputs)}
+        <div className="mt-3">
+          {saveButton}
         </div>
       </form>
     </div>

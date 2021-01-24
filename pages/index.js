@@ -46,22 +46,28 @@ export default function Home() {
   return (
     <div>
 
-      <main className="w-11/12 max-w-lg mx-auto pt-10">
+      <main className="pt-10">
 
-        <div className="mb-7 flex space-x-5 items-center justify-end">
+        <div className="container mb-7 flex space-x-5 items-center justify-end">
           {numbersLength ? <DeleteNumbers/> : null}
           {wheelIcon}
         </div>
 
         {!numbersLength ? (
-          <SetNumbersRange onNewSequence={handleNewSequence} />
+          <div className="container">
+            <SetNumbersRange onNewSequence={handleNewSequence} />
+          </div>
         ) : (
           <>
-            <h3 className="text-3xl mb-2">Teléfonos</h3>
-            <div className="opacity-70 text-lg mb-8">
-              {legibleRange}
+            <div className="container">
+              <h3 className="text-3xl mb-2">Teléfonos</h3>
+              <div className="opacity-70 text-lg mb-8">
+                {legibleRange}
+              </div>
             </div>
-            <NumbersList numbers={numbers}/>
+            <div className="w-full sm:w-11/12 max-w-lg mx-auto">
+              <NumbersList numbers={numbers}/>
+            </div>
           </>
         )}
       </main>

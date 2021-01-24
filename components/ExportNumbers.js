@@ -4,7 +4,6 @@ import useSWR from 'swr'
 import { fetchSequence } from '../firebase/functions'
 import useTimestamp from '../lib/useTimestamp'
 
-const fileName = 'download'
 const exportType = 'csv'
 const savedFileString = 'Archivo descargado!'
 
@@ -17,11 +16,12 @@ export default function ExportNumbers() {
   const getNumbersArr = useCallback(() => {
     return Object.keys(numbers)
       .map(id => {
-        const { called, number, calledAt } = numbers[id]
+        const { called, number, calledAt, notes } = numbers[id]
         return {
           numero: number,
           llamado: called ? 'SI' : 'NO',
-          fecha: calledAt ? getDate(calledAt) : '-'
+          fecha: calledAt ? getDate(calledAt) : '-',
+          notas: notes || ''
         }
       })
       .sort((a, b) => a.index > b.index ? 1 : -1)
@@ -30,6 +30,7 @@ export default function ExportNumbers() {
   const initExportFromJSON = () => {
     setExportLabel('Generando archivo...')
     const data = getNumbersArr()
+    const fileName = `numbers_${Date.now()}`
     exportFromJSON({ data, fileName, exportType })
     setExportLabel(savedFileString)
   }

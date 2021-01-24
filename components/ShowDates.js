@@ -11,10 +11,10 @@ export default function ShowDates() {
   }
   
   return (
-    <>
+    <div>
       <input
         id="showDates"
-        className="transform scale-150 mr-4"
+        className="transform scale-150 ml-1 mr-4"
         type="checkbox"
         onChange={handleChange}
         defaultChecked={showDates == 'true'}
@@ -25,6 +25,6 @@ export default function ShowDates() {
       >
         Ver fechas
       </label>
-    </>
+    </div>
   )
 }

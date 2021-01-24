@@ -25,12 +25,12 @@ export default function SequenceManager() {
   }
 
   return (
-    <>
+    <div>
       <div className="mb-2">
         Id de secuencia:
       </div>
       <input
-        className="form-control mr-3"
+        className="form-control mr-3 mb-3"
         onChange={handleChange}
         defaultValue={seqId}
       />
@@ -41,6 +41,6 @@ export default function SequenceManager() {
       >
         {saveText}
       </button>
-    </>
+    </div>
   )
 }
