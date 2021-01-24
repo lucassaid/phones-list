@@ -18,13 +18,15 @@ function MyApp({ Component, pageProps }) {
 
         <link rel="manifest" href="/manifest.json" />
         <link
-          href="/icons/list.svg"
+          href="/icons/favicon-16.png"
           rel="icon"
+          type="image/png"
           sizes="16x16"
         />
         <link
-          href="/icons/list.svg"
+          href="/icons/favicon-32.png"
           rel="icon"
+          type="image/png"
           sizes="32x32"
         />
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>

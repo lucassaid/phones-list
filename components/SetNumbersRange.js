@@ -31,19 +31,21 @@ export default function setNumbersRange({onNewSequence}) {
       </h3>
       <form onSubmit={handleSubmit}>
         {Object.keys(range).map(prop => (
-          <input
-            key={prop}
-            className="form-control"
-            onChange={e => {
-              setRange({
-                ...range,
-                [prop]: Number(e.target.value)
-              })
-            }}
-            placeholder={placeholders[prop]}
-            defaultValue={range[prop]}
-            type="number"
-          />
+          <div>
+            <input
+              key={prop}
+              className="form-control"
+              onChange={e => {
+                setRange({
+                  ...range,
+                  [prop]: Number(e.target.value)
+                })
+              }}
+              placeholder={placeholders[prop]}
+              defaultValue={range[prop]}
+              type="number"
+            />
+          </div> 
         ))}
         <div>
           <button
