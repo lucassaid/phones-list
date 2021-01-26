@@ -37,7 +37,7 @@ export default function NumbersList({ numbers }) {
   
   const progress = (
     <div className="fixed w-full bottom-0 left-0">
-      <div className="max-w-lg w-full mx-auto bg-blue-500 px-4 h-10 text-white flex items-center">
+      <div className="max-w-lg w-full mx-auto bg-blue-500 h-9 text-white flex items-center justify-center rounded-tr-lg rounded-tl-lg">
         Avance: {calledNumbers} de {numbersArr.length}
       </div>
     </div>
