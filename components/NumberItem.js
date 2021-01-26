@@ -15,7 +15,7 @@ export default function NumberItem({
   const [notesState, setNotesState] = useState(notes)
   const { getDate } = useTimestamp()
 
-  const calledDate = showDate && calledAt && getDate(calledAt)
+  const calledDate = called && showDate && calledAt && getDate(calledAt)
 
   const saveNotes = () => {
     setExpanded(false)

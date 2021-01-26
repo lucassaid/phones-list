@@ -2,6 +2,7 @@ import Link from 'next/link'
 import ExportNumbers from '../components/ExportNumbers'
 import SequenceManager from '../components/SequenceManager'
 import ShowDates from '../components/ShowDates'
+import ShowProgress from '../components/ShowProgress'
 
 const IconBack = () => (
   <Link href="/">
@@ -31,6 +32,7 @@ export default function Advanced() {
       <SequenceManager/>
       <hr className="my-10"/>
       <ShowDates/>
+      <ShowProgress/>
       <hr className="my-10"/>
       <ExportNumbers/>
     </div>
