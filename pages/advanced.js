@@ -6,7 +6,7 @@ import ShowProgress from '../components/ShowProgress'
 
 const IconBack = () => (
   <Link href="/">
-    <a className="flex-shrink-0">
+    <a className="flex-shrink-0 p-1">
       <img
         className="w-8"
         src="/icons/arrow-left.svg"

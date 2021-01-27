@@ -33,7 +33,7 @@ export default function Home() {
 
   const wheelIcon = (
     <Link href="/advanced">
-      <a>
+      <a className="p-2">
         <div className="text-right opacity-70">
           <img
             className="w-6"
@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <div>
       <main className="pt-10">
-        <div className="container mb-7 flex space-x-5 items-center justify-end">
+        <div className="container mb-7 flex space-x-3 items-center justify-end">
           {numbersLength ? <DeleteNumbers/> : null}
           {wheelIcon}
         </div>
