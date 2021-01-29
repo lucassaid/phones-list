@@ -57,14 +57,14 @@ export default function setNumbersRange({onNewSequence}) {
       className="btn btn-primary"
       onClick={generateAndAddSequence}
     >
-      {generating ? 'Generando números...' : 'Generar números'}
+      {generating ? 'Generando números...' : 'Crear secuencia'}
     </button>
   )
 
   return (
-    <div className="lg:pt-20">
+    <div className="pt-10">
       <h3 className="mb-6 text-2xl">
-        Ingrese el rango de números
+        Nueva secuencia
       </h3>
       <form onSubmit={handleSubmit}>
         {Object.keys(range).map(mapInputs)}

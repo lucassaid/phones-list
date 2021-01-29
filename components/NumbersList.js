@@ -1,11 +1,13 @@
 import NumberItem from './NumberItem'
 import { useMemo } from 'react'
 import firebase from '../firebase'
-import { updatePhone } from '../firebase/functions'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 import fetchStorage from '../lib/fetchStorage'
 
-export default function NumbersList({ numbers }) {
+export default function NumbersList({
+  numbers,
+  onUpdatePhone
+}) {
 
   const { data: showDates } = useSWR('show-dates', fetchStorage)
   const { data: showProgress } = useSWR('show-progress', fetchStorage)
@@ -20,19 +22,13 @@ export default function NumbersList({ numbers }) {
     const calledNumbersArr = numbersArr.filter(number => number.called)
     return calledNumbersArr.length
   }, [numbersArr])
-  
-  const updatePhoneAndMutate = (id, updateObj) => {
-    updatePhone(id, updateObj)
-    const newNumber = { ...numbers[id], ...updateObj }
-    mutate('sequence', {...numbers, [id]: newNumber}, false)
-  }
 
   const updateCalled = (id, called) => {
     let updateObj = { called }
     if(called) {
       updateObj.calledAt = firebase.firestore.Timestamp.now()
     }
-    updatePhoneAndMutate(id, updateObj)
+    onUpdatePhone(id, updateObj)
   }
   
   const progress = (
@@ -50,13 +46,13 @@ export default function NumbersList({ numbers }) {
           <NumberItem
             key={id}
             onToggleCalled={() => updateCalled(id, !number.called)}
-            onSaveNotes={notes => updatePhoneAndMutate(id, { notes })}
-            showDate={showDates == 'true'}
+            onSaveNotes={notes => onUpdatePhone(id, { notes })}
+            showDate={showDates}
             {...number}
           />
         ))}
       </div>
-      {showProgress == 'true' && progress}
+      {showProgress && progress}
     </>
   )
 }
