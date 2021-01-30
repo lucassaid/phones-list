@@ -1,18 +1,25 @@
 import Link from 'next/link'
+import DeleteSequence from './DeleteSequence'
 
-export default function SequenceItem({ sequenceId, range }) {
+export default function SequenceItem({ sequenceId, range, onDelete }) {
   
-  const legibleRange = range ? `${range.from} - ${range.to}` : ' '
+  const legibleRange = range ? (
+    <div className="text-center md:text-left md:flex md:space-x-3">
+      <div>{range.from}</div><div>&ndash;</div><div>{range.to}</div>
+    </div>
+  ) : null
 
   return(
-    <Link href={`/${sequenceId}`}>
-      <a className="flex items-center max-w-max rounded-lg my-3 bg-gray-100 py-3 px-4">
-        <img
-          className="h-4 opacity-60 mr-3"
-          src="/icons/arrow-right.svg"
-        />
-        {legibleRange}
-      </a>
-    </Link>
+    <div className="flex w-full items-center justify-end rounded-lg my-3 bg-gray-100 py-2 px-4">
+      <div className="mr-auto">{legibleRange}</div>
+      <Link href={`/${sequenceId}`}>
+        <a className="ml-4 mr-2">
+          <button className="btn-small border">
+            Continuar
+          </button>
+        </a>
+      </Link>
+      <DeleteSequence onDelete={onDelete}/>
+    </div>
   )
 }

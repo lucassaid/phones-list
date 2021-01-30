@@ -1,8 +1,7 @@
-import { mutate } from 'swr'
 import { useMemo } from 'react'
-import { useAlert, useCloseAlert } from '../components/Alert'
+import { useAlert, useCloseAlert } from './Alert'
 
-export default function DeleteNumbers() {
+export default function DeleteNumbers({onDelete}) {
 
   const alert = useAlert()
   const closeAlert = useCloseAlert()
@@ -17,9 +16,7 @@ export default function DeleteNumbers() {
       </button>
       <button
         onClick={() => {
-          localStorage.removeItem('sequence-id')
-          mutate('sequence-id')
-          mutate('sequence')
+          onDelete()
           closeAlert()
         }}
         className="btn bg-red-600 text-white"
@@ -31,17 +28,20 @@ export default function DeleteNumbers() {
 
   const deleteNumbers = () => {
     alert({
-      title: '¿Borrar todos los números?',
+      title: '¿Borrar secuencia?',
       buttons: deleteModalButtons
     })
   }
 
   return (
     <button
-      className="btn-small border"
+      className="p-2 opacity-70 hover:opacity-100"
       onClick={deleteNumbers}
     >
-      Borrar todos los números
+      <img
+        className="h-6"
+        src="/icons/delete.svg"
+      />
     </button>
   )
 }

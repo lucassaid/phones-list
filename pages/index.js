@@ -8,7 +8,11 @@ import { useEffect } from 'react'
 
 export default function Home() {
 
-  const { sequences, addSequence: addSequenceLocal } = useSequences()
+  const {
+    sequences,
+    addSequence: addSequenceLocal,
+    removeSequence
+  } = useSequences()
   const router = useRouter()
 
   const sequencesIds = Object.keys(sequences)
@@ -31,13 +35,6 @@ export default function Home() {
     oldId && migrateOldId(oldId)
   }, [])
 
-  // const deleteSequence = sequenceId => {
-  //   const index = sequences.indexOf(sequenceId)
-  //   let newSequencies = Array.from(sequences)
-  //   newSequencies.splice(index, 1)
-  //   mutate('sequences-ids', newSequencies)
-  // }
-
   return (
     <Layout>
       <div className="container">
@@ -52,6 +49,7 @@ export default function Home() {
                 <SequenceItem
                   key={sequenceId}
                   sequenceId={sequenceId}
+                  onDelete={() => removeSequence(sequenceId)}
                   {...sequence}
                 />
               )

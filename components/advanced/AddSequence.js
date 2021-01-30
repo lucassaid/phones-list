@@ -40,12 +40,13 @@ export default function AddSequence() {
   return (
     <>
       <div className="mb-2">
-        Agregar secuencia:
+        Importar secuencia:
       </div>
       <input
         className="form-control mb-3"
         onChange={handleChange}
         defaultValue={newSeqId}
+        placeholder="Id de secuencia"
       />
       <div>
         {newSeqId.length > 0 && (
