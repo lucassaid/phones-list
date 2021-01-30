@@ -23,6 +23,10 @@
     @apply border-2 p-2 rounded-md max-w-full appearance-none;
   }
 
+  .form-control[invalid="true"] {
+    @apply border-red-300;
+  }
+
   .container {
     @apply w-11/12 max-w-lg mx-auto;
   }

@@ -11,7 +11,7 @@ export default function setNumbersRange({onSequenceCreated, children}) {
   const [from, setFrom] = useState()
   const [to, setTo] = useState()
   const [generating, setGenerating] = useState(false)
-  const { alert } = useAlert()
+  const [invalidRange, setInvalidRange] = useState(false)
   const router = useRouter()
   
   const createSequence = async () => {
@@ -24,7 +24,7 @@ export default function setNumbersRange({onSequenceCreated, children}) {
       router.push(`/${sequenceId}`)
       onSequenceCreated && onSequenceCreated(sequenceId)
     } catch(err) {
-      err.message && alert({ title: err.message })
+      err.message && setInvalidRange(err.message)
     } finally {
       setGenerating(false)
     }
@@ -51,7 +51,11 @@ export default function setNumbersRange({onSequenceCreated, children}) {
       <div key={prop} className="mb-3">
         <input
           className="form-control"
-          onChange={e => setter(Number(e.target.value))}
+          onChange={e => {
+            setInvalidRange(false)
+            setter(Number(e.target.value))
+          }}
+          invalid={invalidRange ? 'true' : 'false'}
           placeholder={placeholder}
           defaultValue={value}
           type="number"
@@ -75,9 +79,16 @@ export default function setNumbersRange({onSequenceCreated, children}) {
     </button>
   )
 
+  const invalidMessage = invalidRange && (
+    <div className="text-red-500">
+      {invalidRange}
+    </div>
+  )
+
   return (
     <form onSubmit={handleSubmit}>
       {Object.keys(range).map(mapInputs)}
+      {invalidMessage}
       {typeof children == 'function' ? (
         children(saveButton)
       ) : (
