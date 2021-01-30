@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { generateSequence } from '../lib/utils'
+import { validateRange, generateSequence } from '../lib/utils'
 import { useAlert } from './Alert'
 import { addSequence as addSequenceFirebase,} from '../firebase/functions'
 import useSequences from '../lib/useSequences'
@@ -17,6 +17,7 @@ export default function setNumbersRange({onSequenceCreated, children}) {
   const createSequence = async () => {
     setGenerating(true)
     try {
+      validateRange(from, to)
       const numbersArr = generateSequence(from, to)
       const sequenceId = await addSequenceFirebase(numbersArr, {from, to})
       addSequence(sequenceId, { range: { from, to }})
