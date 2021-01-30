@@ -11,15 +11,22 @@ export default function setNumbersRange({onSequenceCreated, children}) {
   const [from, setFrom] = useState()
   const [to, setTo] = useState()
   const [generating, setGenerating] = useState(false)
-  const alert = useAlert()
+  const { alert } = useAlert()
   const router = useRouter()
   
   const createSequence = async () => {
-    const numbersArr = generateSequence(from, to, alert, setGenerating)
-    const sequenceId = await addSequenceFirebase(numbersArr, {from, to})
-    addSequence(sequenceId, { range: { from, to }})
-    router.push(`/${sequenceId}`)
-    onSequenceCreated && onSequenceCreated(sequenceId)
+    setGenerating(true)
+    try {
+      const numbersArr = generateSequence(from, to)
+      const sequenceId = await addSequenceFirebase(numbersArr, {from, to})
+      addSequence(sequenceId, { range: { from, to }})
+      router.push(`/${sequenceId}`)
+      onSequenceCreated && onSequenceCreated(sequenceId)
+    } catch(err) {
+      err.message && alert({ title: err.message })
+    } finally {
+      setGenerating(false)
+    }
   }
 
   const handleSubmit = e => e.preventDefault()
