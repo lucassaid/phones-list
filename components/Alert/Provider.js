@@ -1,18 +1,18 @@
 import AlertContext from './context'
 import { useState } from 'react'
 
-const Modal = ({title, desc, buttons, onAccept}) => (
+const Modal = ({title, desc, content, buttons, onAccept}) => (
   <div className="w-11/12 z-20 max-w-md rounded-lg bg-white p-5">
     
     <div className="text-center text-xl">
       {title}
     </div>
 
-    <div className="text-center text-sm opacity-80">
-      {desc}
-    </div>
+    {desc}
 
-    {!buttons ? (
+    {content}
+
+    {!content && (
       <div className="mt-8 text-center">
         <button
           onClick={onAccept}
@@ -21,8 +21,6 @@ const Modal = ({title, desc, buttons, onAccept}) => (
           Aceptar
         </button>
       </div>
-    ) : (
-      buttons
     )}
   </div>
 )
@@ -32,25 +30,25 @@ export default function Provider({children}) {
   const [opened, setOpened] = useState(false)
   const [options, setOptions] = useState({})
 
-  const open = options => {
+  const alert = options => {
     setOptions(options)
     setOpened(true)
   }
 
-  const close = () => setOpened(false)
+  const closeAlert = () => setOpened(false)
 
   return (
-    <AlertContext.Provider value={{open, close}}>
+    <AlertContext.Provider value={{alert, closeAlert}}>
       {children}
       {opened && (
         <div className="z-40 fixed w-screen h-screen left-0 top-0 flex justify-center items-center">
           <Modal
-            onAccept={close}
+            onAccept={closeAlert}
             {...options}
           />
           <div
             className="opacity-50 bg-black w-full h-full absolute z-10"
-            onClick={close}
+            onClick={closeAlert}
           />
         </div>
       )}

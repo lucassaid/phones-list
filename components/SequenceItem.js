@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import DeleteSequence from './DeleteSequence'
+import DeleteSequenceModal from './DeleteSequenceModal'
 
 export default function SequenceItem({ sequenceId, range, onDelete }) {
   
@@ -13,13 +13,13 @@ export default function SequenceItem({ sequenceId, range, onDelete }) {
     <div className="flex w-full items-center justify-end rounded-lg my-3 bg-gray-100 py-2 px-4">
       <div className="mr-auto">{legibleRange}</div>
       <Link href={`/${sequenceId}`}>
-        <a className="ml-4 mr-2">
+        <a className="ml-4">
           <button className="btn-small border">
             Continuar
           </button>
         </a>
       </Link>
-      <DeleteSequence onDelete={onDelete}/>
+      {/* <DeleteSequenceModal onDelete={onDelete}/> */}
     </div>
   )
 }

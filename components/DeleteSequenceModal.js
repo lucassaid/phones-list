@@ -1,12 +1,11 @@
 import { useMemo } from 'react'
-import { useAlert, useCloseAlert } from './Alert'
+import { useAlert } from './Alert'
 
 export default function DeleteNumbers({onDelete}) {
 
-  const alert = useAlert()
-  const closeAlert = useCloseAlert()
+  const { alert, closeAlert } = useAlert()
 
-  const deleteModalButtons = useMemo(() => (
+  const content = useMemo(() => (
     <div className="mt-8 text-right">
       <button
         onClick={closeAlert}
@@ -29,7 +28,7 @@ export default function DeleteNumbers({onDelete}) {
   const deleteNumbers = () => {
     alert({
       title: '¿Borrar secuencia?',
-      buttons: deleteModalButtons
+      content
     })
   }
 

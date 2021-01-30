@@ -14,13 +14,13 @@ export default function ShowProgress({ storageKey, label }) {
     <div>
       <input
         id={`${storageKey}-checkbox`}
-        className="transform scale-150 ml-1 mr-4 mb-5"
+        className="transform cursor-pointer scale-150 ml-1 mr-4 mb-5"
         type="checkbox"
         onChange={handleChange}
         defaultChecked={data}
       />
       <label
-        className="select-none"
+        className="select-none cursor-pointer"
         htmlFor={`${storageKey}-checkbox`}
       >
         {label}

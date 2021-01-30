@@ -3,9 +3,10 @@ import { useRouter } from 'next/router'
 import NumbersList from '../components/NumbersList'
 import { updatePhone, fetchSequence } from '../firebase/functions'
 import useSWR, { mutate } from 'swr'
-import Layout from '../components/Layout'
-import BackAndPageName from '../components/BackAndPageName'
+import Layout from '../components/layout/Layout'
+import BackAndPageName from '../components/layout/BackAndPageName'
 import useSequences from '../lib/useSequences'
+import CreateSequenceModal from '../components/CreateSequenceModal'
 
 const Detail = ({title, desc}) => (
   <div className="mb-1">
@@ -32,9 +33,16 @@ export default function Sequence() {
     mutate(sequenceId, {...numbers, [phoneId]: newNumber}, false)
   }
 
+  const topBar = (
+    <div className="flex flex-1 justify-between items-center">  
+      <BackAndPageName />
+      <CreateSequenceModal />
+    </div>
+  )
+
   return (
     <Layout
-      topBar={<BackAndPageName title="Lista" />}
+      topBar={topBar}
       path={`/${sequenceId}`}
     >
       {numbersLength ? (

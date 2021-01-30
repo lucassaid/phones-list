@@ -1,7 +1,7 @@
 import ExportNumbers from '../components/advanced/ExportNumbers'
 import CheckboxOption from '../components/advanced/CheckboxOption'
-import Layout from '../components/Layout'
-import BackAndPageName from '../components/BackAndPageName'
+import Layout from '../components/layout/Layout'
+import BackAndPageName from '../components/layout/BackAndPageName'
 import AddSequence from '../components/advanced/AddSequence'
 import { useRouter } from 'next/router'
 
