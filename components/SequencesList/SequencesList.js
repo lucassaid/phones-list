@@ -1,5 +1,5 @@
 import SequenceItem from './SequenceItem'
-import useSequences from '../lib/useSequences'
+import useSequences from '../../lib/useSequences'
 
 export default function SequencesList() {
 

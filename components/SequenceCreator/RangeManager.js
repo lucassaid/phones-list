@@ -30,10 +30,7 @@ export default function setNumbersRange({onRangeChanged, invalid}) {
       <div key={prop} className="mb-3">
         <input
           className="form-control"
-          onChange={e => {
-            // setInvalidRange(false)
-            setter(Number(e.target.value))
-          }}
+          onChange={e => setter(Number(e.target.value))}
           invalid={invalid ? 'true' : 'false'}
           placeholder={placeholder}
           defaultValue={value}

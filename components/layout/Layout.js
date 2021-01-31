@@ -18,7 +18,7 @@ export default function Layout({topBar, children, path, hideSettingsButton}) {
   const justify = topBar ? 'justify-between' : 'justify-end'
 
   return (
-    <main className="pt-10">
+    <main className="py-10">
       <div className={`container mb-7 flex space-x-3 items-center ${justify}`}>
         {topBar}
         {!hideSettingsButton ? (

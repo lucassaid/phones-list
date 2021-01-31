@@ -7,6 +7,8 @@ import Layout from '../components/layout/Layout'
 import BackAndPageName from '../components/layout/BackAndPageName'
 import useSequences from '../lib/useSequences'
 import CreateSequenceModal from '../components/CreateSequenceModal'
+import fetchStorage from '../lib/fetchStorage'
+import Progress from '../components/NumbersList/Progress'
 
 const Detail = ({title, desc}) => (
   <div className="mb-1">
@@ -24,11 +26,17 @@ export default function Sequence() {
   const { query: { sequenceId } } = useRouter()
   const { data: numbers } = useSWR(sequenceId, fetchSequence)
   const { sequences } = useSequences()
+  const { data: showProgress } = useSWR('show-progress', fetchStorage)
 
   const info = sequences[sequenceId]
-  const numbersLength = useMemo(() => Object.keys(numbers || {}).length, [numbers])
   const legibleRange = info && getLegibleRange(info.range)
   const legibleRange2 = info && info.secondRange && getLegibleRange(info.secondRange)
+
+  const numbersArr = useMemo(() => {
+    return Object.keys(numbers || {})
+      .map(id => ({ id, ...numbers[id]}))
+      .sort((a, b) => a.index > b.index ? 1 : -1)
+  }, [numbers])
 
   const handleUpdatePhone = (phoneId, updateObj) => {
     updatePhone(sequenceId, phoneId, updateObj)
@@ -48,7 +56,7 @@ export default function Sequence() {
       topBar={topBar}
       path={`/${sequenceId}`}
     >
-      {numbersLength ? (
+      {numbersArr.length ? (
         <>
           <div className="container opacity-40 text-sm mb-8">
             <Detail title="Números:" desc={legibleRange} />
@@ -57,10 +65,11 @@ export default function Sequence() {
           </div>
           <div className="w-full sm:w-11/12 max-w-lg mx-auto">
             <NumbersList
-              numbers={numbers}
+              numbersArr={numbersArr}
               onUpdatePhone={handleUpdatePhone}
             />
           </div>
+          {showProgress && <Progress numbersArr={numbersArr} />}
         </>
       ) : (
         <div className="pt-28 text-center text-xl">

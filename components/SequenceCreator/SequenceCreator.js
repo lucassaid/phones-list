@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { validateRange, generateSequence, shuffle } from '../../lib/utils'
+import { validateRanges, generateSequence, shuffle } from '../../lib/utils'
 import { createFirestoreSequence } from '../../firebase/functions'
 import useSequences from '../../lib/useSequences'
 import { useRouter } from 'next/router'
@@ -19,7 +19,7 @@ export default function setNumbersRange({onSequenceCreated, children}) {
     setGenerating(true)
     try {
       const ranges = !range2 ? [range] : [range, range2]
-      ranges.forEach(validateRange)
+      validateRanges(ranges)
       let doc = { range }
       if(range2) doc.secondRange = range2
       const numbersArr = ranges.map(generateSequence)
@@ -45,7 +45,7 @@ export default function setNumbersRange({onSequenceCreated, children}) {
       onClick={createSequence}
       tabIndex="3"
     >
-      {generating ? 'Generando números...' : 'Crear secuencia'}
+      {generating ? 'Creando...' : 'Crear secuencia'}
     </button>
   )
 
@@ -56,6 +56,7 @@ export default function setNumbersRange({onSequenceCreated, children}) {
   )
 
   const handleCheckboxChange = e => {
+    setInvalidRange(false)
     setRange2(e.target.checked ? {} : null)
   }
 

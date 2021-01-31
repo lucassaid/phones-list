@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useAlert } from './Alert'
+import { useAlert } from '../Alert'
 
 export default function DeleteNumbers({onDelete}) {
 

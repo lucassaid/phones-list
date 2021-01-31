@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useTimestamp from '../lib/useTimestamp'
+import useTimestamp from '../../lib/useTimestamp'
 
 export default function NumberItem({
   number,
