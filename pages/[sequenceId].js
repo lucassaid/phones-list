@@ -17,6 +17,8 @@ const Detail = ({title, desc}) => (
   </div>
 )
 
+const getLegibleRange = range => `${range.from} - ${range.to}`
+
 export default function Sequence() {
 
   const { query: { sequenceId } } = useRouter()
@@ -25,7 +27,8 @@ export default function Sequence() {
 
   const info = sequences[sequenceId]
   const numbersLength = useMemo(() => Object.keys(numbers || {}).length, [numbers])
-  const legibleRange = info ? `${info.range.from} - ${info.range.to}` : ' '
+  const legibleRange = info && getLegibleRange(info.range)
+  const legibleRange2 = info && info.secondRange && getLegibleRange(info.secondRange)
 
   const handleUpdatePhone = (phoneId, updateObj) => {
     updatePhone(sequenceId, phoneId, updateObj)
@@ -49,6 +52,7 @@ export default function Sequence() {
         <>
           <div className="container opacity-40 text-sm mb-8">
             <Detail title="Números:" desc={legibleRange} />
+            {legibleRange2 && <Detail title="Combinados con:" desc={legibleRange2} />}
             <Detail title="Código:" desc={sequenceId} />
           </div>
           <div className="w-full sm:w-11/12 max-w-lg mx-auto">

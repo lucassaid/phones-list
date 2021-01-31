@@ -34,4 +34,8 @@
   .tap-transparent {
     -webkit-tap-highlight-color: transparent;
   }
+
+  .max-w-xxs {
+    max-width: 16rem;
+  }
 }

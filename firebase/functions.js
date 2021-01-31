@@ -17,11 +17,11 @@ export const fetchSequence = async (sequenceId) => {
   return result
 }
 
-export const addSequence = async (sequence, range) => {
+export const createFirestoreSequence = async (sequence, ...doc) => {
   const sequenceRef = db.collection('sequences').doc()
   await sequenceRef.set({ 
     createdAt: firebase.firestore.Timestamp.now(),
-    range,
+    ...doc,
   })
   const batch = db.batch()
   sequence.forEach((number, index) => {

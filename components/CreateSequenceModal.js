@@ -13,10 +13,10 @@ export default function CreateSequenceModal({trigger = defaultTrigger}) {
   const { alert, closeAlert } = useAlert()
 
   const content = (
-    <div className="mt-6 text-center">
+    <div className="mt-6 max-w-xxs mx-auto">
       <SequenceCreator onSequenceCreated={closeAlert}>
         {saveButton => (
-          <div className="flex justify-center flex-row-reverse">
+          <div className="flex justify-right flex-row-reverse mt-5">
             {saveButton}
             <button
               className="btn border mr-4"

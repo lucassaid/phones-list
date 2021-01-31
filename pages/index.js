@@ -1,10 +1,10 @@
-import SequenceCreator from '../components/SequenceCreator'
 import Layout from '../components/layout/Layout'
 import useSequences from '../lib/useSequences'
 import { useEffect } from 'react'
 import SequencesList from '../components/SequencesList'
 import migrateOldId from '../lib/migrateOldId'
 import CreateSequenceModal from '../components/CreateSequenceModal'
+import SequenceCreator from '../components/SequenceCreator'
 
 export default function Home() {
 

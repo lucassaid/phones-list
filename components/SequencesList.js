@@ -8,6 +8,7 @@ export default function SequencesList() {
   
   const mapSequences = sequenceId => {
     const sequence = sequences[sequenceId]
+
     return (
       <SequenceItem
         key={sequenceId}
