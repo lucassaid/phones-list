@@ -17,7 +17,7 @@ export const fetchSequence = async (sequenceId) => {
   return result
 }
 
-export const createFirestoreSequence = async (sequence, ...doc) => {
+export const createFirestoreSequence = async (sequence, doc) => {
   const sequenceRef = db.collection('sequences').doc()
   await sequenceRef.set({ 
     createdAt: firebase.firestore.Timestamp.now(),
