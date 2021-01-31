@@ -5,7 +5,7 @@ import useSequences from '../../lib/useSequences'
 import useTimestamp from '../../lib/useTimestamp'
 
 const exportType = 'csv'
-const savedFileString = 'Archivo descargado!'
+const exportString = 'Exportar todo'
 
 const getNumbersArr = (numbers, getDate) => {
   return Object.keys(numbers)
@@ -21,26 +21,26 @@ const getNumbersArr = (numbers, getDate) => {
     .sort((a, b) => a.index > b.index ? 1 : -1)
 }
 
-export default function ExportNumbers() {
+export default function ExportSequences() {
 
   const { getDate } = useTimestamp()
   const { sequences } = useSequences()
-  const [ exportLabel, setExportLabel ] = useState('Exportar todo')
+  const [ exportLabel, setExportLabel ] = useState(exportString)
 
   const initExportFromJSON = async () => {
-    setExportLabel('Generando archivo...')
+    setExportLabel('Generando archivos...')
     for(const sequenceId in sequences) {
       const numbers = await fetchSequence(sequenceId)
       const data = getNumbersArr(numbers, getDate)
       const fileName = `${sequenceId}_${Date.now()}`
       exportFromJSON({ data, fileName, exportType })
     }
-    setExportLabel(savedFileString)
+    setExportLabel('Descargando archivos')
   }
 
   const disabled = !sequences 
     || !Object.keys(sequences).length
-    || exportLabel == savedFileString
+    || exportLabel != exportString
 
   return (
     <button

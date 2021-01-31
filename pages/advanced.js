@@ -1,8 +1,8 @@
-import ExportNumbers from '../components/advanced/ExportNumbers'
+import ExportSequences from '../components/advanced/ExportSequences'
 import CheckboxOption from '../components/advanced/CheckboxOption'
 import Layout from '../components/layout/Layout'
 import BackAndPageName from '../components/layout/BackAndPageName'
-import AddSequence from '../components/advanced/AddSequence'
+import ImportSequence from '../components/advanced/ImportSequence'
 import { useRouter } from 'next/router'
 
 export default function Advanced() {
@@ -29,9 +29,9 @@ export default function Advanced() {
           label="Mostrar progreso"
         />
         <hr className="my-8"/>
-        <AddSequence/>
+        <ImportSequence/>
         <hr className="my-8"/>
-        <ExportNumbers/>
+        <ExportSequences/>
       </div>
     </Layout>  
   )
