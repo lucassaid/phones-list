@@ -39,6 +39,11 @@ export default function ImportSequence() {
       <div className="my-3">Secuencia encontrada:</div>
       <div className="opacity-70 text-2xl">
         {foundSequence.range.from} - {foundSequence.range.to}
+        {foundSequence.secondRange && (
+          <div className="mt-2">
+            {foundSequence.secondRange.from} - {foundSequence.secondRange.to}
+          </div>
+        )}
       </div>
       <button
         className="btn border mt-3"
