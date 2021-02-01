@@ -1,5 +1,5 @@
 const Modal = ({title, desc, content, onAccept}) => (
-  <div className="w-11/12 z-20 max-w-md rounded-lg bg-white p-5">
+  <div className="w-11/12 z-20 max-w-md rounded-lg bg-white p-5 relative">
     
     <div className="text-center text-xl">
       {title}

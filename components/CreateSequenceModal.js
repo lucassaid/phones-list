@@ -16,15 +16,17 @@ export default function CreateSequenceModal({trigger = defaultTrigger}) {
     <div className="mt-6 max-w-xxs mx-auto">
       <SequenceCreator onSequenceCreated={closeAlert}>
         {saveButton => (
-          <div className="flex justify-right flex-row-reverse mt-5">
-            {saveButton}
-            <button
-              className="btn border mr-4"
-              onClick={closeAlert}
-              tabIndex="4"
-            >
-              Cancelar
-            </button>
+          <div className="h-11 mt-8 w-full">
+            <div className="flex justify-right flex-row-reverse absolute right-5">
+              {saveButton}
+              <button
+                className="btn border mr-4"
+                onClick={closeAlert}
+                tabIndex="4"
+              >
+                Cancelar
+              </button>
+            </div>
           </div>
         )}
       </SequenceCreator>

@@ -41,7 +41,7 @@ export default function Home() {
       <CreateSequenceModal trigger={newSequenceButton}/>
     </div>
   ):(
-    <div className="pt-10">
+    <div className="pt-6">
       <h3 className="mb-6 text-2xl">
         Nueva secuencia
       </h3>

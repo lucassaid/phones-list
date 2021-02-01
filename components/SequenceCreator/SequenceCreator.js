@@ -78,19 +78,21 @@ export default function setNumbersRange({onSequenceCreated, children}) {
       />
       {checkBox}
       {range2 && (
-        <RangeManager
-          onRangeChanged={range => {
-            setInvalidRange(false)
-            setRange2(range)
-          }}
-          invalid={invalidRange}
-        />
+        <div className="mt-4">
+          <RangeManager
+            onRangeChanged={range => {
+              setInvalidRange(false)
+              setRange2(range)
+            }}
+            invalid={invalidRange}
+          />
+        </div>
       )}
       {invalidMessage}
       {typeof children == 'function' ? (
         children(saveButton)
       ) : (
-        <div className="mt-4">
+        <div className="mt-6">
           {saveButton}
         </div>
       )}

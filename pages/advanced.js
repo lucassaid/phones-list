@@ -20,14 +20,16 @@ export default function Advanced() {
       hideSettingsButton
     >
       <div className="container pt-5">
-        <CheckboxOption
-          storageKey="show-dates"
-          label="Mostrar fechas"
-        />
-        <CheckboxOption
-          storageKey="show-progress"
-          label="Mostrar progreso"
-        />
+        <div className="space-y-4">
+          <CheckboxOption
+            storageKey="show-dates"
+            label="Mostrar fechas"
+          />
+          <CheckboxOption
+            storageKey="show-progress"
+            label="Mostrar progreso"
+          />
+        </div>
         <hr className="my-8"/>
         <ImportSequence/>
         <hr className="my-8"/>
