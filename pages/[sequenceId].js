@@ -69,7 +69,9 @@ export default function Sequence() {
               onUpdatePhone={handleUpdatePhone}
             />
           </div>
-          {showProgress && <Progress numbersArr={numbersArr} />}
+          <div className="mt-16">
+            {showProgress && <Progress numbersArr={numbersArr} />}
+          </div>
         </>
       ) : (
         <div className="pt-28 text-center text-xl">

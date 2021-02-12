@@ -15,7 +15,6 @@ export default function NumbersList({
     if(called) {
       updateObj.calledAt = firebase.firestore.Timestamp.now()
     }
- 
     onUpdatePhone(id, updateObj)
   }
 
