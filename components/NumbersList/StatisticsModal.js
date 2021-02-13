@@ -8,7 +8,7 @@ const defaultTrigger = (
   </button>
 )
 
-const ModalContent = ({datesData, children}) => (
+const DatesList = ({datesData}) => (
   <div className="mt-6">
     {datesData.existenceDates.map(date => (
         <div key={date} className="my-2">
@@ -18,7 +18,6 @@ const ModalContent = ({datesData, children}) => (
         </div>
       )
     )}
-    {children}
   </div>
 )
 
@@ -31,7 +30,14 @@ export default function StatisticsModal({trigger = defaultTrigger, numbersArr, }
     alert({
       title: 'Llamadas realizadas ordenadas por fecha',
       content: (
-        <ModalContent datesData={datesData}>
+        <>
+          {datesData.existenceDates.length ? (
+            <DatesList datesData={datesData}/>
+          ) : (
+            <div className="opacity-60 text-center mt-4">
+              No hay llamadas realizadas
+            </div>
+          )}
           <div className="text-right mt-4">
             <button
               className="btn btn-primary"
@@ -41,7 +47,7 @@ export default function StatisticsModal({trigger = defaultTrigger, numbersArr, }
               Ok
             </button>
           </div>
-        </ModalContent>   
+        </>
       )
     })
   }
