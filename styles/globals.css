@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 @layer utilities {
-  .btn {
+
+  .btn, .btn-small {
     @apply px-3 py-2 rounded-md inline-block disabled:opacity-50 disabled:cursor-auto;
   }
 
   .btn-small {
-    @apply px-3 py-1 rounded-md inline-block disabled:opacity-50 disabled:cursor-auto;
+    @apply py-1;
   }
 
   .btn-primary {
