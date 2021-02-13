@@ -1,7 +1,6 @@
 import React from 'react'
 import { useAlert } from '../Alert'
 import { getStatistics } from '../../lib/utils'
-import { useState } from 'react'
 
 const defaultTrigger = (
   <button className="btn-small border">
@@ -9,57 +8,43 @@ const defaultTrigger = (
   </button>
 )
 
+const ModalContent = ({datesData, children}) => (
+  <div className="mt-6">
+    {datesData.existenceDates.map(date => (
+        <div key={date} className="my-2">
+          <span className="opacity-70">{date}</span>
+          <span className="mx-3">-</span>
+          {datesData.allDates[date]} llamadas
+        </div>
+      )
+    )}
+    {children}
+  </div>
+)
+
 export default function StatisticsModal({trigger = defaultTrigger, numbersArr, }) {
   
-  const [queryData, setQueryData] = useState(queryData)
-
-  const calledData = (numbersArr) => {
-    let datesData = getStatistics(numbersArr)
-    console.log(datesData)
-    return { datesData }
-  }
-
   const { alert, closeAlert } = useAlert()
    
   const openStatistics = () => {
-    setQueryData ( calledData(numbersArr) )
-    console.log(setQueryData)
-    console.log(queryData)
-    console.log(alert)
-  }
-  
-  let content = (
-    <div className="mt-6 max-w-xxs w-full">
-      {
-        queryData &&              
-        queryData.datesData.existenceDates.map( row => {    
-        console.log(queryData)            
-          return (
-            <div style={{marginTop: 10 }} className="flex justify-between ">
-              <div> Día {row}: </div>  <div> {queryData.datesData.allDates[row]} llamadas </div>
-            </div>
-          )
-        })
-      }
-      <div className="flex justify-right flex-row-reverse absolute right-5">
-        <button
-          className="btn btn-primary -mr-2 -mt-7"
-          onClick={closeAlert}
-          tabIndex="4"
-        >
-          Ok
-        </button>
-      </div>
-    </div>
-  ) 
-
-  if(queryData) {
+    const datesData = getStatistics(numbersArr)
     alert({
       title: 'Llamadas realizadas ordenadas por fecha',
-      content,  
+      content: (
+        <ModalContent datesData={datesData}>
+          <div className="text-right mt-4">
+            <button
+              className="btn btn-primary"
+              onClick={closeAlert}
+              tabIndex="4"
+            >
+              Ok
+            </button>
+          </div>
+        </ModalContent>   
+      )
     })
-    setQueryData (false)
-  } 
+  }
 
   return React.cloneElement(trigger,  {onClick: openStatistics})
 }
