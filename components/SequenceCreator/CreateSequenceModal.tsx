@@ -9,7 +9,7 @@ const defaultTrigger = (
 )
 
 interface CreateSequenceModalProps {
-  trigger: any
+  trigger?: any
 }
 
 export default function CreateSequenceModal({trigger = defaultTrigger}: CreateSequenceModalProps) {
