@@ -69,6 +69,7 @@ export default function Sequence() {
               onUpdatePhone={handleUpdatePhone}
             />
           </div>
+          <div className="mt-16"/>
           {showProgress && <Progress numbersArr={numbersArr} />}
         </>
       ) : (
