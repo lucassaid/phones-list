@@ -19,7 +19,6 @@ export default function NumbersList({
   }
 
   return (
-   
     numbersArr.map(({ id, ...number}) => (
       <NumberItem
         key={id}

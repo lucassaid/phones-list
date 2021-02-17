@@ -16,7 +16,6 @@ export default function NumberItem({
   const { getDate } = useTimestamp()
 
   const calledDate = called && showDate && calledAt && getDate(calledAt)
- 
   const saveNotes = () => {
     setExpanded(false)
     onSaveNotes(notesState)
@@ -62,7 +61,6 @@ export default function NumberItem({
       </div>
     </div>
   )
- 
   const date = calledDate ? (
     <div className="opacity-50 text-sm mt-1">
       {calledDate}

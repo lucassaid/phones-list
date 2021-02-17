@@ -21,7 +21,6 @@ export default function Layout({topBar, children, path, hideSettingsButton}) {
     <main className="py-10">
       <div className={`container mb-7 flex space-x-3 items-center ${justify}`}>
         {topBar}
-        {console.log( <WheelIcon back={path ? `?b=${path}` : ''}/>)}
         {!hideSettingsButton ? (
           <WheelIcon back={path ? `?b=${path}` : ''}/>
         ) : null}
