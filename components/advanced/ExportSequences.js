@@ -2,19 +2,19 @@ import exportFromJSON from 'export-from-json'
 import { useState } from 'react'
 import { fetchSequence } from '../../firebase/functions'
 import useSequences from '../../lib/useSequences'
-import useTimestamp from '../../lib/useTimestamp'
+import { getTimestampDate } from '../../lib/utils'
 
 const exportType = 'csv'
 const exportString = 'Exportar todo'
 
-const getNumbersArr = (numbers, getDate) => {
+const getNumbersArr = numbers => {
   return Object.keys(numbers)
     .map(id => {
       const { called, number, calledAt, notes } = numbers[id]
       return {
         numero: number,
         llamado: called ? 'SI' : 'NO',
-        fecha: calledAt ? getDate(calledAt) : '-',
+        fecha: calledAt ? getTimestampDate(calledAt) : '-',
         notas: notes || ''
       }
     })
@@ -23,7 +23,6 @@ const getNumbersArr = (numbers, getDate) => {
 
 export default function ExportSequences() {
 
-  const { getDate } = useTimestamp()
   const { sequences } = useSequences()
   const [ exportLabel, setExportLabel ] = useState(exportString)
 
@@ -31,7 +30,7 @@ export default function ExportSequences() {
     setExportLabel('Generando archivos...')
     for(const sequenceId in sequences) {
       const numbers = await fetchSequence(sequenceId)
-      const data = getNumbersArr(numbers, getDate)
+      const data = getNumbersArr(numbers)
       const fileName = `${sequenceId}_${Date.now()}`
       exportFromJSON({ data, fileName, exportType })
     }

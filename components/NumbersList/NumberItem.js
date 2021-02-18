@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useTimestamp from '../../lib/useTimestamp'
+import { getTimestampDate } from '../../lib/utils'
 
 export default function NumberItem({
   number,
@@ -13,9 +13,8 @@ export default function NumberItem({
 
   const [expanded, setExpanded] = useState(false)
   const [notesState, setNotesState] = useState(notes)
-  const { getDate } = useTimestamp()
+  const calledDate = called && showDate && calledAt && getTimestampDate(calledAt)
 
-  const calledDate = called && showDate && calledAt && getDate(calledAt)
   const saveNotes = () => {
     setExpanded(false)
     onSaveNotes(notesState)
@@ -61,11 +60,12 @@ export default function NumberItem({
       </div>
     </div>
   )
-  const date = calledDate ? (
+
+  const date = (
     <div className="opacity-50 text-sm mt-1">
       {calledDate}
     </div>
-  ) : null
+  )
 
   return (
     <div className="hover:bg-gray-100 px-2 sm:rounded-md">
@@ -77,7 +77,7 @@ export default function NumberItem({
           <div className={called ? 'opacity-40 line-through' : ''}>
             {number}
           </div>
-          {date}
+          {calledDate && date}
         </div>
         {callButton}
         {notesButton}
