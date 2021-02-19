@@ -29,12 +29,16 @@ export default function Advanced() {
             storageKey="show-progress"
             label="Mostrar progreso"
           />
+          <CheckboxOption
+            storageKey="show-numbers-sequentially"
+            label="Mostrar números secuencialmente"
+          />
         </div>
         <hr className="my-8"/>
         <ImportSequence/>
         <hr className="my-8"/>
         <ExportSequences/>
       </div>
-    </Layout>  
+    </Layout>
   )
 }

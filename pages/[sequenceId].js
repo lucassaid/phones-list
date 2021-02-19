@@ -27,15 +27,17 @@ export default function Sequence() {
   const { data: numbers } = useSWR(sequenceId, fetchSequence)
   const { sequences } = useSequences()
   const { data: showProgress } = useSWR('show-progress', fetchStorage)
+  const { data: showNumbersSequentially } = useSWR('show-numbers-sequentially', fetchStorage)
 
   const info = sequences[sequenceId]
   const legibleRange = info && getLegibleRange(info.range)
   const legibleRange2 = info && info.secondRange && getLegibleRange(info.secondRange)
 
   const numbersArr = useMemo(() => {
+    const sortBy = showNumbersSequentially ? 'number' : 'index'
     return Object.keys(numbers || {})
       .map(id => ({ id, ...numbers[id]}))
-      .sort((a, b) => a.index > b.index ? 1 : -1)
+      .sort((a, b) => a[sortBy] > b[sortBy] ? 1 : -1)
   }, [numbers])
 
   const handleUpdatePhone = (phoneId, updateObj) => {
