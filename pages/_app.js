@@ -23,6 +23,20 @@ function MyApp({ Component, pageProps }) {
           sizes="32x32"
         />
         <meta name="theme-color" content="#60a5fb" />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=262966676"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '[Tracking ID]');
+              `,
+          }}
+        />
       </Head>
       <Component {...pageProps} />
     </AlertProvider>
