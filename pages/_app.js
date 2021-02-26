@@ -1,46 +1,34 @@
-import Head from 'next/head'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import * as gtag from '../lib/gtag'
 import '../styles/globals.css'
 import { Provider as AlertProvider } from '../components/Alert'
+import Head from 'next/head'
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
+
+  const router = useRouter()
+  
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url)
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
-    <AlertProvider>
+    <>
       <Head>
-        <meta charSet="utf-8" />
         <title>Lista de números</title>
-        <link rel="manifest" href="/manifest.json" />
-        <link
-          href="/icons/icon-16.png"
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-        />
-        <link
-          href="/icons/icon-32.png"
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-        />
-        <meta name="theme-color" content="#60a5fb" />
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=262966676"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '[Tracking ID]');
-              `,
-          }}
-        />
       </Head>
-      <Component {...pageProps} />
-    </AlertProvider>
+      <AlertProvider>
+        <Component {...pageProps} />
+      </AlertProvider>
+    </>
   )
 }
 
-export default MyApp
+export default App
