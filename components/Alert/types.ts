@@ -1,6 +1,6 @@
 export interface ModalOptions {
   title?: string,
-  desc?: string,
+  desc?: any,
   content?: any,
   onAccept?: () => void
 }

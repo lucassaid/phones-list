@@ -34,16 +34,19 @@ export default function Sequence() {
   const { data: phones } = useSWR<Phones>(sequenceId ? sequenceId : null, fetchPhones)
   const { sequences } = useSequencesInfo()
   const { data: showProgress } = useSWR('show-progress', fetchStorage)
+  const { data: showNumbersSequentially } = useSWR('show-numbers-sequentially', fetchStorage)
+  console.log(showNumbersSequentially)
 
   const info: SequenceInfo = sequences[sequenceId]
   const legibleRange = info && getLegibleRange(info.range)
   const legibleRange2 = info && info.secondRange && getLegibleRange(info.secondRange)
 
   const numbersArr: Phone[] = useMemo(() => {
+    const sortBy = showNumbersSequentially ? 'number' : 'index'
     const phonesIds = Object.keys(phones || {})
     return phonesIds
-      .sort((a, b) => phones[a].index > phones[b].index ? 1 : -1)
       .map((phoneId: Phone['id']) => phones[phoneId])
+      .sort((a, b) => a[sortBy] > b[sortBy] ? 1 : -1)
   }, [phones])
 
   const handleUpdatePhone = async (phoneId: Phone['id'], updateObj: Phone) => {
