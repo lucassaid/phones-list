@@ -74,7 +74,7 @@ export default function Sequence() {
             {legibleRange2 && <Detail title="Combinados con:" desc={legibleRange2} />}
             <Detail title="Código:" desc={sequenceId || ''} />
           </div>
-          <div className="w-full sm:w-11/12 max-w-lg mx-auto">
+          <div className="w-full sm:w-11/12 max-w-lg mx-auto mb-6">
             <PhonesList
               numbersArr={numbersArr}
               onUpdatePhone={handleUpdatePhone}
