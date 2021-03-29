@@ -1,5 +1,6 @@
-import { Range } from '../types'
+import { Phone, Range } from '../types'
 import getDate from './getTimestampDate'
+import { Timestamp } from '@firebase/firestore-types'
 
 export const shuffle = (sourceArray: any[]): any[] => {
   const copy = Array.from(sourceArray)
@@ -30,7 +31,13 @@ export const validateRanges = (ranges: Range[]): void => {
   if(range1.from == range2.from) throw new Error('Las secuencias no pueden ser iguales')
 }
 
-export const getStatistics = (numbersArr) => {
+function sortByDate(dateStrA: string, dateStrB: string) {
+  const dateA = new Date(dateStrA).getTime()
+  const dateB = new Date(dateStrB).getTime()
+  return dateA > dateB ? -1 : 1
+}
+
+export const getStatistics = (numbersArr: Phone[]) => {
   let datesQuantity = {} // will be something like { '20/02/2021': 4 }
   
   // populate `datesQuantity`
@@ -42,6 +49,6 @@ export const getStatistics = (numbersArr) => {
   })
 
   // create and return an ordered array like [{date: '20/02/2021', quantity: 4}]
-  const orderedDates = Object.keys(datesQuantity).sort()
+  const orderedDates = Object.keys(datesQuantity).sort(sortByDate)
   return orderedDates.map(date => ({ date, quantity: datesQuantity[date] }))
 }
