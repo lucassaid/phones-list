@@ -35,7 +35,6 @@ export default function Sequence() {
   const { sequences } = useSequencesInfo()
   const { data: showProgress } = useSWR('show-progress', fetchStorage)
   const { data: showNumbersSequentially } = useSWR('show-numbers-sequentially', fetchStorage)
-  console.log(showNumbersSequentially)
 
   const info: SequenceInfo = sequences[sequenceId]
   const legibleRange = info && getLegibleRange(info.range)
