@@ -1,6 +1,5 @@
 import { Phone, Range } from '../types'
 import getDate from './getTimestampDate'
-import { Timestamp } from '@firebase/firestore-types'
 
 export const shuffle = (sourceArray: any[]): any[] => {
   const copy = Array.from(sourceArray)
