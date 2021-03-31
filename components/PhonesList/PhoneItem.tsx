@@ -5,6 +5,7 @@ import { Phone } from '../../types'
 interface PhoneItem extends Phone {
   showDate: boolean,
   onToggleCalled: () => void,
+  onCall: () => void,
   onSaveNotes: (notes: string) => void,
 }
 
@@ -15,6 +16,7 @@ export default function NumberItem({
   calledAt,
   showDate,
   onToggleCalled,
+  onCall,
   onSaveNotes,
 }: Partial<PhoneItem>) {
 
@@ -31,6 +33,7 @@ export default function NumberItem({
     <a
       className="flex-0 btn-small border opacity-80 hover:opacity-90 mr-2 md:mr-3"
       href={`tel:${number}`}
+      onClick={onCall}
     >
       Llamar
     </a>

@@ -18,6 +18,8 @@ export default function NumbersList({
 
   const updateCalled = (id: Phone['id'], called: Phone['called']): void => {
     let updateObj: Phone = { called }
+    console.log(id)
+    console.log(called)
     if(called) {
       updateObj.calledAt = firebase.firestore.Timestamp.now()
     }
@@ -30,6 +32,7 @@ export default function NumbersList({
         <PhoneItem
           key={id}
           onToggleCalled={() => updateCalled(id, !phone.called)}
+          onCall={() => updateCalled(id, true)}
           onSaveNotes={notes => onUpdatePhone(id, { notes })}
           showDate={showDates}
           {...phone}
