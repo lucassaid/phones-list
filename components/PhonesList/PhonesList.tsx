@@ -18,8 +18,6 @@ export default function NumbersList({
 
   const updateCalled = (id: Phone['id'], called: Phone['called']): void => {
     let updateObj: Phone = { called }
-    console.log(id)
-    console.log(called)
     if(called) {
       updateObj.calledAt = firebase.firestore.Timestamp.now()
     }
