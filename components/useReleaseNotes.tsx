@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
-import { useAlert } from '../Alert'
+import { useAlert } from './Alert'
 
-export default function UpdateModal() {
+export default function useReleaseNotes() {
 
   const { alert, closeAlert } = useAlert()
 
   useEffect(() => {
-    console.log(localStorage)
     let existsViewUpdate = localStorage.getItem('0.4-release-notes-displayed')
     if(!existsViewUpdate) {
       alert({
@@ -31,5 +30,4 @@ export default function UpdateModal() {
     </div>
   ) 
 
-  return (<></>)
 }
