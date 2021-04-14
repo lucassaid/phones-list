@@ -30,10 +30,15 @@ export const validateRanges = (ranges: Range[]): void => {
   if(range1.from == range2.from) throw new Error('Las secuencias no pueden ser iguales')
 }
 
+function dateEnToEs(dateStr) {
+  const arr = dateStr.split('/')
+  return `${arr[1]}/${arr[0]}/${arr[2]}`
+}
+
 function sortByDate(dateStrA: string, dateStrB: string) {
-  const dateA = new Date(dateStrA).getTime()
-  const dateB = new Date(dateStrB).getTime()
-  return dateA > dateB ? -1 : 1
+  const dateA = new Date(dateEnToEs(dateStrA)).getTime()
+  const dateB = new Date(dateEnToEs(dateStrB)).getTime()
+  return dateA > dateB ? 1 : -1
 }
 
 export const getStatistics = (numbersArr: Phone[]) => {
@@ -49,5 +54,6 @@ export const getStatistics = (numbersArr: Phone[]) => {
 
   // create and return an ordered array like [{date: '20/02/2021', quantity: 4}]
   const orderedDates = Object.keys(datesQuantity).sort(sortByDate)
+  console.log(orderedDates)
   return orderedDates.map(date => ({ date, quantity: datesQuantity[date] }))
 }
