@@ -5,6 +5,7 @@ import SequencesList from '../components/SequencesList'
 import migrateOldId from '../lib/migrateOldId'
 import CreateSequenceModal from '../components/SequenceCreator/CreateSequenceModal'
 import SequenceCreator from '../components/SequenceCreator'
+import useReleaseNotes from '../components/useReleaseNotes'
 
 export default function Home() {
 
@@ -14,7 +15,9 @@ export default function Home() {
     const oldId = localStorage.getItem('sequence-id')
     oldId && migrateOldId(oldId)
   }, [])
-
+  
+  useReleaseNotes()
+  
   const createdSequencies = sequencesLength > 0 && (
     <>
       <h3 className="mb-6 text-2xl">

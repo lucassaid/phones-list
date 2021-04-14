@@ -30,6 +30,7 @@ export default function NumbersList({
         <PhoneItem
           key={id}
           onToggleCalled={() => updateCalled(id, !phone.called)}
+          onCall={() => updateCalled(id, true)}
           onSaveNotes={notes => onUpdatePhone(id, { notes })}
           showDate={showDates}
           {...phone}
