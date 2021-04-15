@@ -18,12 +18,12 @@ export default function NumbersList({
   const { data: showDates } = useSWR('show-dates', fetchStorage)
   const router = useRouter()
 
-  const updateCalled = (id: Phone['id'], called: Phone['called']): void => {
+  const updateCalled = async (id: Phone['id'], called: Phone['called']) => {
     let updateObj: Phone = { called }
     if(called) {
       updateObj.calledAt = firebase.firestore.Timestamp.now()
     }
-    onUpdatePhone(id, updateObj)
+    await onUpdatePhone(id, updateObj)
   }
 
   return (
@@ -32,8 +32,8 @@ export default function NumbersList({
         <PhoneItem
           key={id}
           onToggleCalled={() => updateCalled(id, !phone.called)}
-          onCall={() => {
-            updateCalled(id, true)
+          onCall={async () => {
+            await updateCalled(id, true)
             router.push(`tel:${phone.number}`)
           }}
           onSaveNotes={notes => onUpdatePhone(id, { notes })}
