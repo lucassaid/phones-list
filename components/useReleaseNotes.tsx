@@ -11,7 +11,8 @@ export default function useReleaseNotes() {
       alert({
         title: 'Nueva actualización agregada:',
         content,
-      }), 
+        preventCloseOnBackdropClick: true
+      }),
       localStorage.setItem('0.4-release-notes-displayed', 'true')
     }
   }, [] );

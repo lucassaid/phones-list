@@ -6,14 +6,18 @@ import { ModalOptions } from './types'
 export default function Provider({children}: {children: any}) {
 
   const [opened, setOpened] = useState(false)
-  const [options, setOptions] = useState<ModalOptions>()
+  const [options, setOptions] = useState<ModalOptions>({})
 
   const alert = (options: ModalOptions) => {
     setOptions(options)
     setOpened(true)
   }
 
-  const closeAlert = () => setOpened(false)
+  const closeAlert = () => {
+    if(!options.preventCloseOnBackdropClick) {
+      setOpened(false)
+    }
+  }
 
   return (
     <AlertContext.Provider value={{alert, closeAlert}}>

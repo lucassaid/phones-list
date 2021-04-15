@@ -30,13 +30,12 @@ export default function NumberItem({
   }
 
   const callButton = (
-    <a
-      className="flex-0 btn-small border opacity-80 hover:opacity-90 mr-2 md:mr-3"
-      href={`tel:${number}`}
+    <div
+      className="flex-0 cursor-pointer btn-small border opacity-80 hover:opacity-90 mr-2 md:mr-3"
       onClick={onCall}
     >
       Llamar
-    </a>
+    </div>
   )
 
   const notesButton = (

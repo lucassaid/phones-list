@@ -10,6 +10,7 @@ import CreateSequenceModal from '../components//SequenceCreator/CreateSequenceMo
 import fetchStorage from '../lib/fetchStorage'
 import Progress from '../components/PhonesList/Progress'
 import { Phone, SequenceInfo, SequenceId, Range, Phones } from '../types'
+import useReleaseNotes from '../components/useReleaseNotes'
 
 interface Detail {
   title: string,
@@ -29,6 +30,7 @@ const getLegibleRange = (range: Range) => `${range.from} - ${range.to}`
 
 export default function Sequence() {
 
+  useReleaseNotes()
   const { query } = useRouter()
   const sequenceId: SequenceId | null = query && query.sequenceId ? query.sequenceId.toString() : null
   const { data: phones } = useSWR<Phones>(sequenceId ? sequenceId : null, fetchPhones)

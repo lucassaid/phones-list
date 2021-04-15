@@ -3,6 +3,7 @@ import firebase from '../../firebase'
 import useSWR from 'swr'
 import fetchStorage from '../../lib/fetchStorage'
 import { Phone } from '../../types'
+import { useRouter } from 'next/router'
 
 interface NumberListProps {
   onUpdatePhone: (id: Phone['id'], updateObj: Phone) => void,
@@ -15,6 +16,7 @@ export default function NumbersList({
 }: NumberListProps) {
 
   const { data: showDates } = useSWR('show-dates', fetchStorage)
+  const router = useRouter()
 
   const updateCalled = (id: Phone['id'], called: Phone['called']): void => {
     let updateObj: Phone = { called }
@@ -30,7 +32,10 @@ export default function NumbersList({
         <PhoneItem
           key={id}
           onToggleCalled={() => updateCalled(id, !phone.called)}
-          onCall={() => updateCalled(id, true)}
+          onCall={() => {
+            updateCalled(id, true)
+            router.push(`tel:${phone.number}`)
+          }}
           onSaveNotes={notes => onUpdatePhone(id, { notes })}
           showDate={showDates}
           {...phone}

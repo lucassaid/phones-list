@@ -2,5 +2,6 @@ export interface ModalOptions {
   title?: string,
   desc?: any,
   content?: any,
-  onAccept?: () => void
+  onAccept?: () => void,
+  preventCloseOnBackdropClick?: boolean
 }
